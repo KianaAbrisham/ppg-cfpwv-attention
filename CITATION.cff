@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "Please cite the related paper when using this implementation."
+type: software
+title: "CNN–BiLSTM–Attention for PPG cf-PWV Estimation"
+version: 0.1.0
+authors:
+  - family-names: "Pilevar Abrisham"
+    given-names: "Kiana"
+preferred-citation:
+  type: article
+  title: "Advancing PPG-based cf-PWV estimation with an integrated CNN-BiLSTM-Attention model"
+  doi: "10.1007/s11760-024-03496-4"
+  year: 2024
+  authors:
+    - family-names: "Pilevar Abrisham"
+      given-names: "Kiana"
+    - family-names: "Alipour"
+      given-names: "Khalil"
+    - family-names: "Tarvirdizadeh"
+      given-names: "Bahram"
+    - family-names: "Ghamari"
+      given-names: "Mohammad"

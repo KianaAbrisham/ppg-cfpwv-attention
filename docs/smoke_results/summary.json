@@ -1,0 +1,67 @@
+{
+  "status": "artificial_data_software_check",
+  "folds": 2,
+  "models": {
+    "waveform": {
+      "mae_m_s": {
+        "mean": 1.5218084559622767,
+        "std": 0.3820291121758884
+      },
+      "rmse_m_s": {
+        "mean": 1.7221836322271153,
+        "std": 0.3449013658488697
+      },
+      "r2": {
+        "mean": -0.05453469098718133,
+        "std": 0.011290096112349452
+      },
+      "mape_percent": {
+        "mean": 22.161604127437933,
+        "std": 7.559098919890234
+      },
+      "latency_median_ms": {
+        "mean": 317.0094165000137,
+        "std": 21.92512773526645
+      },
+      "latency_p95_ms": {
+        "mean": 379.48736287501106,
+        "std": 24.855943533068235
+      },
+      "checkpoint_mb": {
+        "mean": 0.563941,
+        "std": 0.0
+      }
+    },
+    "spectrogram": {
+      "mae_m_s": {
+        "mean": 1.5068082914534568,
+        "std": 0.3714600406344748
+      },
+      "rmse_m_s": {
+        "mean": 1.7121007709958065,
+        "std": 0.32752166780897174
+      },
+      "r2": {
+        "mean": -0.04428062486104867,
+        "std": 0.030280380207973356
+      },
+      "mape_percent": {
+        "mean": 21.68063598326291,
+        "std": 7.408207741034626
+      },
+      "latency_median_ms": {
+        "mean": 16.30409624999629,
+        "std": 2.0237937014507463
+      },
+      "latency_p95_ms": {
+        "mean": 20.390607449942877,
+        "std": 6.486533889979714
+      },
+      "checkpoint_mb": {
+        "mean": 1.453101,
+        "std": 0.0
+      }
+    }
+  },
+  "interpretation": "Fold SD is not a confidence interval. Repeated model selection requires an independent final test or nested CV."
+}

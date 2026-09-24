@@ -1,0 +1,7 @@
+{
+  "trained_checkpoint_prediction_roundtrips": [
+    "waveform",
+    "spectrogram"
+  ],
+  "converter_roundtrip": "passed"
+}

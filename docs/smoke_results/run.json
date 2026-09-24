@@ -1,0 +1,42 @@
+{
+  "project": "ppg-cfpwv-attention",
+  "status": "artificial_data_software_check",
+  "paper_reproduction_verified": false,
+  "arguments": {
+    "signals": "/workspace/scratch/9793ff8eed97/output/research-portfolio/ppg-cfpwv-attention/runs/notebook-demo/demo_input/signals.csv",
+    "targets": "/workspace/scratch/9793ff8eed97/output/research-portfolio/ppg-cfpwv-attention/runs/notebook-demo/demo_input/targets.csv",
+    "site": "synthetic",
+    "models": [
+      "waveform",
+      "spectrogram"
+    ],
+    "demo": true,
+    "output": "/workspace/scratch/9793ff8eed97/output/research-portfolio/ppg-cfpwv-attention/runs/notebook-demo",
+    "length": 512,
+    "fs": 500,
+    "nperseg": 76,
+    "window": "hann",
+    "folds": 2,
+    "epochs": 1,
+    "patience": 50,
+    "batch_size": 16,
+    "weights": "none",
+    "seed": 42
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "packages": {
+      "numpy": "2.3.5",
+      "pandas": "2.2.3",
+      "scipy": "1.17.0",
+      "scikit-learn": "1.8.0",
+      "tensorflow-cpu": "2.20.0",
+      "keras": "3.11.3",
+      "torch": "2.7.1+cpu",
+      "torchvision": "0.22.1+cpu"
+    }
+  },
+  "signals_sha256": "7caaecf8f9a1250fd03da1ef507a20c95a1769fa503cc6bebfe35e62a0b44845",
+  "targets_sha256": "dec2921bfe7a8b21b9c6718b15ddc6bda0b05ed671e5c2d31cd3b8162556b245"
+}
