@@ -1,38 +1,51 @@
-# Research provenance
+# Research provenance and implementation notes
 
-Source notebooks: Springer.ipynb. Their SHA-256 hashes are in `provenance.json`.
-Original notebook bytes were preserved separately; the package is a new implementation copy.
+This repository refactors the author's `Springer.ipynb` research notebook associated with [Advancing PPG-based cf-PWV estimation with an integrated CNN-BiLSTM-Attention model](https://doi.org/10.1007/s11760-024-03496-4). The original notebook was preserved separately; its SHA-256 hash and the refactor's reproduction status are recorded in [`provenance.json`](provenance.json).
 
-## Implementation changes
+## Changes from the notebook
 
-Preserves time as the LSTM sequence axis in the 2D branch; replaces the fixed reshape with dimensions derived from the convolution output. Spectrogram input now has one channel instead of three identical channels, explicit Hann windows, and training-only input normalization.
+- **Sequence construction:** the spectrogram branch explicitly keeps time as the LSTM sequence axis. The sequence shape is derived from the convolution output rather than a fixed reshape.
+- **Spectrogram representation:** a single log-power channel replaces three identical channels. Window selection is explicit, and normalization statistics are fitted only on the inner training partition.
+- **Data alignment:** strict subject-ID matching replaces positional assumptions and truncation. Each run expects one waveform per subject from one artery.
+- **Input length:** a configured fixed length replaces dataset-wide implicit padding length. Shorter signals are zero-padded; longer signals are rejected without silent cropping.
+- **Target scaling:** regression target statistics are fitted within each inner training partition. Predictions are transformed back to m/s.
+- **Execution and reuse:** command-line entry points, saved preprocessing, native Keras checkpoints, recorded split IDs, and automated checks replace dependence on notebook execution state.
 
-Across the project: strict subject-ID joins replace positional assumptions/truncation; fixed input
-length replaces dataset-wide implicit padding length; regression target scaling occurs inside the
-training partition; repeated notebook state is replaced by complete entry points and saved preprocessing.
-The corrections and modeling changes can change the reported scores.
+These corrections and modeling changes can change results relative to the research notebook. Numerical equivalence with the publication is not claimed.
 
-Spectrograms use 500 Hz by default, segment length 76, overlap `nperseg // 8`, constant detrending,
-PSD output and a 1e-10 power floor before 10·log10. Tukey, when selected explicitly, uses alpha .25.
-Zero padding and square image resizing are explicit modeling assumptions.
+## Current model and preprocessing choices
 
-## Results and limitations
+Both architectures use a convolution with 16 filters, batch normalization, ReLU, pooling, a bidirectional LSTM with 64 units per direction, dropout of 0.2, temporal attention, and a scalar regression output. Training uses Adam with learning rate 0.001 and mean squared error on scaled targets.
 
-The source studies use 4,374 simulated cardiovascular profiles. The regression target is cf-PWV in m/s.
-Performance on simulated profiles does not establish performance on wearable or patient recordings.
-The original final CSV exports, paper checkpoints and complete final experiment record were not supplied.
-Saved values in the old notebooks cannot certify that every cell is a publication-final experiment.
+Both architectures train from random initialization. The shared command-line parser accepts `--weights imagenet` and `--weights none`, but this project's model builder does not use pretrained weights. The README specifies `--weights none` to make that intent explicit in saved run arguments.
 
-No published metric is presented as a result of this refactor. Before reporting corrected research
-scores, verify subject/site correspondence, sampling rate, target units, and waveform columns; run the
-full experiment and retain its configuration, input hashes and split records. Hardware/library versions
-can affect exact numerical reproducibility. CPU is the validated target; other devices require validation.
+Waveforms are passed to the model at their supplied amplitude scale after padding. For spectrograms, the defaults are:
+
+| Setting | Value |
+| --- | --- |
+| Sampling rate | 500 Hz; configurable, with no resampling |
+| Segment length | 76 samples |
+| Window | Hann; Hamming and Tukey are optional |
+| Overlap | `nperseg // 8` samples |
+| Detrending | Constant |
+| Representation | Power spectral density, followed by `10 * log10(max(power, 1e-10))` |
+| Normalization | One mean and standard deviation fitted on the inner training spectrograms |
+
+The Tukey option uses alpha 0.25. Spectrograms keep their frequency–time grid and one channel; this branch does not resize them into square images. Padding, window choice, sampling rate, and signal amplitude conventions are part of the experiment specification and should be checked against the source data.
+
+## Evaluation and interpretation
+
+The related study uses [PWDB](https://zenodo.org/records/3275625), an in-silico dataset. The regression target is cf-PWV in m/s. Artificial waveforms generated by `--demo` are independent software fixtures and are not PWDB samples.
+
+The default research workflow uses five outer folds, each with a separate inner validation partition. Both architectures share the same subject splits. Model selection must not use the held-out test subjects; repeated comparisons using outer-fold results require nested cross-validation or a separate final test set. Multiple waveforms or artery records belonging to one subject must not be treated as independent subjects.
+
+The original final CSV exports, paper-trained checkpoints, and complete final experiment record were not available for this refactor. Saved values in an old notebook do not by themselves establish that every cell belongs to the publication's final experiment. No published metric is presented as a result of this implementation.
+
+Before reporting research scores, verify subject/site correspondence, sampling rate, target units, and waveform columns; run the full experiment and retain its configuration, input hashes, and split records. Hardware and library versions can affect exact numerical reproducibility. The [validation record](VALIDATION.md) describes the completed CPU software checks. Performance on simulated profiles does not establish performance on wearable or patient recordings.
 
 ## References
 
-- Paper: https://doi.org/10.1007/s11760-024-03496-4
-- Dataset: https://zenodo.org/records/3275625
-- Signal processing: https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.spectrogram.html
-- Keras serialization: https://keras.io/guides/serialization_and_saving/
-- VGG preprocessing: https://keras.io/api/applications/vgg/
-- ResNet weights: https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html
+- [Related publication](https://doi.org/10.1007/s11760-024-03496-4)
+- [PWDB dataset](https://zenodo.org/records/3275625)
+- [SciPy spectrogram documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.spectrogram.html)
+- [Keras serialization and saving](https://keras.io/guides/serialization_and_saving/)
