@@ -55,3 +55,7 @@ For a new full experiment, retain the configuration, input hashes, subject split
 ## Public-source conversion verified — 2026-09-28
 
 The official PWDB v0.2 waveform archive, haemodynamic targets and provided fiducials were downloaded and verified against publisher checksums. All 4,374 subject IDs were aligned explicitly, all waveform values passed a CSV round-trip check, and the target units and sampling rate were checked against the source documentation. Four additional tests verify shuffled-ID alignment and rejection of duplicate IDs, missing subjects and corrupt cached downloads. See [public data setup](PUBLIC_DATA.md) and the [conversion manifest](public_data/conversion_manifest.json). These checks validate data preparation; they do not establish numerical reproduction of a paper.
+
+## Execution provenance
+
+The recorded checks were executed with AI coding assistance in a hosted Linux CPU environment. Absolute `/workspace/scratch/` paths in saved logs and configurations identify that historical runtime. They are preserved as execution evidence; the README commands use paths relative to the repository. This documentation and formatting update does not alter the saved metrics, notebook outputs, or source hashes for those runs.

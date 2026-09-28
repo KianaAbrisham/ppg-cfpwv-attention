@@ -1,4 +1,4 @@
-PROJECT='ppg-cfpwv-attention'
-ENGINE='keras'
-CLASSIFICATION=False
-MODELS=['waveform', 'spectrogram']
+PROJECT = "ppg-cfpwv-attention"
+ENGINE = "keras"
+CLASSIFICATION = False
+MODELS = ["waveform", "spectrogram"]

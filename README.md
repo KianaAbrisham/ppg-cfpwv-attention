@@ -106,3 +106,9 @@ Timing reports the median and 95th percentile of 20 synchronous, batch-one forwa
 | [`.github/workflows/checks.yml`](.github/workflows/checks.yml) | Automated CPU tests and waveform demo |
 
 Citation metadata are available in [`CITATION.cff`](CITATION.cff). Performance on simulated profiles alone does not establish performance on patient or wearable recordings.
+
+## Research provenance and development
+
+This package is based on Kiana Pilevar Abrisham's PPG research notebook associated with the cited attention-model paper. AI coding assistance was used to develop and refactor the modular workflow, tests, documentation, and data-preparation tools, and to execute the recorded software checks. The [research notes](docs/RESEARCH_NOTES.md) explain the representation and preprocessing changes from that notebook.
+
+Recorded checks were run in a hosted Linux CPU environment. See the [portfolio development notes](https://github.com/KianaAbrisham/KianaAbrisham/blob/main/docs/DEVELOPMENT.md) for execution provenance and the scope of AI assistance.
