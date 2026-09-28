@@ -51,3 +51,7 @@ The test suite checks checkpoint serialization for both model architectures. The
 Original research CSV exports, paper-trained checkpoints, and a complete final experiment record were unavailable. Full PWDB experiments and reproduction of the publication's numerical results have not been verified. GPU, Windows, and macOS execution have not been validated.
 
 For a new full experiment, retain the configuration, input hashes, subject splits, preprocessing, checkpoints, and held-out predictions. Review the [research notes](RESEARCH_NOTES.md) before comparing its results with the paper.
+
+## Public-source conversion verified — 2026-09-28
+
+The official PWDB v0.2 waveform archive, haemodynamic targets and provided fiducials were downloaded and verified against publisher checksums. All 4,374 subject IDs were aligned explicitly, all waveform values passed a CSV round-trip check, and the target units and sampling rate were checked against the source documentation. Four additional tests verify shuffled-ID alignment and rejection of duplicate IDs, missing subjects and corrupt cached downloads. See [public data setup](PUBLIC_DATA.md) and the [conversion manifest](public_data/conversion_manifest.json). These checks validate data preparation; they do not establish numerical reproduction of a paper.

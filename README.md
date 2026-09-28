@@ -50,6 +50,8 @@ The [executed quickstart notebook](notebooks/01_quickstart.ipynb) shows training
 
 ## Use research data
 
+A verified downloader and converter is now available for the official release. See [public PWDB setup](docs/PUBLIC_DATA.md). For these converted files, use `--length 487` and `--fs 500`.
+
 The related study uses [PWDB](https://zenodo.org/records/3275625), an in-silico dataset of virtual adults. Original research CSV exports and paper-trained checkpoints are not included. `prepare_data.py` converts existing wide CSV exports into the schema below; it does not download or process the raw PWDB release automatically.
 
 | File | Required columns | Meaning |
