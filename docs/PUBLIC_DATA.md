@@ -1,6 +1,6 @@
 # Public PWDB data
 
-The converter uses **PWDB v0.2.0, Zenodo record 3275625**, the release cited by the related papers. PWDB contains simulated pulse waves for 4,374 virtual healthy adults. It is not a patient-recording dataset.
+The converter uses **PWDB v0.2.0, Zenodo record 3275625**. PWDB contains simulated pulse waves for 4,374 virtual healthy adults. It is not a patient-recording dataset.
 
 ## Download and prepare
 
