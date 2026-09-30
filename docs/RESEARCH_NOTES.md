@@ -39,7 +39,7 @@ The related study uses [PWDB](https://zenodo.org/records/3275625), an in-silico 
 
 The default research workflow uses five outer folds, each with a separate inner validation partition. Both architectures share the same subject splits. Model selection must not use the held-out test subjects; repeated comparisons using outer-fold results require nested cross-validation or a separate final test set. Multiple waveforms or artery records belonging to one subject must not be treated as independent subjects.
 
-The original final CSV exports, paper-trained checkpoints, and complete final experiment record were not available for this refactor. Saved values in an old notebook do not by themselves establish that every cell belongs to the publication's final experiment. No published metric is presented as a result of this implementation.
+The original final CSV exports, paper-trained checkpoints, and complete final experiment record were not available for this refactor. Current results and evaluation scope are documented in the [validation record](VALIDATION.md).
 
 Before reporting research scores, verify subject/site correspondence, sampling rate, target units, and waveform columns; run the full experiment and retain its configuration, input hashes, and split records. Hardware and library versions can affect exact numerical reproducibility. The [validation record](VALIDATION.md) describes the completed CPU software checks. Performance on simulated profiles does not establish performance on wearable or patient recordings.
 
